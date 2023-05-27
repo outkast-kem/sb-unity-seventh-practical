@@ -7,21 +7,21 @@ public class CreatePeasantButtonComponent : MonoBehaviour
     [SerializeField] private DeferredTimer createPeasantTimer;
     [SerializeField] private int peasantCost;
 
-    private Button button;
+    private Button _button;
 
     // Start is called before the first frame update
     void Start()
     {
-        button = GetComponent<Button>();
+        _button = GetComponent<Button>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (resources.WheatCount >= peasantCost)
-            button.interactable = true;
+            _button.interactable = true;
         else
-            button.interactable = false;
+            _button.interactable = false;
     }
 
     public void CreatePeasant()
