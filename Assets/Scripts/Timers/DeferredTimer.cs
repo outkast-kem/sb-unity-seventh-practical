@@ -11,7 +11,10 @@ public class DeferredTimer : MonoBehaviour
     private bool _isStarted;
     private float _currentTime;
 
+    public delegate void TickDelegate(float leftTime);
+
     public event Action OnTimerEnded;
+    public event TickDelegate OnTick;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,9 @@ public class DeferredTimer : MonoBehaviour
             return;
 
         _currentTime -= Time.deltaTime;
+
+        var leftTime = _currentTime / maxTime;
+        OnTick?.Invoke(leftTime);
 
         if (_currentTime <= 0)
         {

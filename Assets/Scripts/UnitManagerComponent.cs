@@ -9,17 +9,11 @@ public class UnitManagerComponent : MonoBehaviour
     [SerializeField] private Text peasantsCountText;
     [SerializeField] private Text warriorsCountText;
 
-    [SerializeField] private DeferredTimer warriorCreateTimer;
-    [SerializeField] private DeferredTimer peasantCreateTimer;
-
     public int PeasantsCount => peasantsCount;
     public int WarriorsCount => warriorsCount;
 
     void Start()
     {
-        warriorCreateTimer.OnTimerEnded += WarriorCreateTimer_OnTimerEnded;
-        peasantCreateTimer.OnTimerEnded += PeasantCreateTimer_OnTimerEnded;
-
         UpdatePeasantsCountText();
         UpdateWarriorsCountText();
     }
@@ -28,14 +22,14 @@ public class UnitManagerComponent : MonoBehaviour
     {
     }
 
-    private void PeasantCreateTimer_OnTimerEnded()
+    public void IncreasePeasantCount()
     {
         Debug.Log("Peasant ready");
         peasantsCount++;
         UpdatePeasantsCountText();
     }
 
-    private void WarriorCreateTimer_OnTimerEnded()
+    public void IncreaseWarriorsCount()
     {
         Debug.Log("Warrior ready");
         warriorsCount++;
