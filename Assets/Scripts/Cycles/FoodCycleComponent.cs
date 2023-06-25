@@ -8,6 +8,7 @@ public class FoodCycleComponent : MonoBehaviour
     [SerializeField] Timer foodCycleTimer;
     [SerializeField] ResourcesManagerComponent resourceManager;
     [SerializeField] UnitManagerComponent unitManager;
+    [SerializeField] LogComponent logComponent;
 
     /// <summary>
     /// Кол-во потребляемой воинами пшеницы
@@ -23,5 +24,7 @@ public class FoodCycleComponent : MonoBehaviour
     {
         var decreaseCount = unitManager.WarriorsCount * wheatPerWarrior;
         resourceManager.DecreaseWheat(decreaseCount);
+
+        logComponent.AddEvent($"Цикл еды завершен. Потреблено: {decreaseCount} единиц пшеницы");
     }
 }
