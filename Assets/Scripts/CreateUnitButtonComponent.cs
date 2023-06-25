@@ -45,6 +45,8 @@ namespace Assets.Scripts
         {
             Debug.Log("Start create unit");
 
+            resources.DecreaseWheat(unitCost);
+
             _isTimerStarted = true;
             createUnitTimer.TimerStart();
         }

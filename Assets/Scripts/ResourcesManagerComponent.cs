@@ -4,12 +4,6 @@ using UnityEngine.UI;
 public class ResourcesManagerComponent : MonoBehaviour
 {
     [SerializeField] private int wheatCount;
-    [SerializeField] private int wheatPerPeasant;
-    [SerializeField] private int wheatPerWarrior;
-
-    [SerializeField] private Timer wheatTimer;
-    [SerializeField] private Timer foodTimer;
-    [SerializeField] private UnitManagerComponent unitManager;
 
     [SerializeField] private Text wheatCountText;
 
@@ -17,20 +11,18 @@ public class ResourcesManagerComponent : MonoBehaviour
 
     private void Start()
     {
-        wheatTimer.OnTimerEnded += WheatTimer_OnTimerEnded;
-        foodTimer.OnTimerEnded += FoodTimer_OnTimerEnded;
         SetWheatText();
     }
 
-    private void FoodTimer_OnTimerEnded()
+    public void IncreaseWheat(int increaseCount)
     {
-        wheatCount -= unitManager.WarriorsCount * wheatPerWarrior;
+        wheatCount += increaseCount;
         SetWheatText();
     }
 
-    private void WheatTimer_OnTimerEnded()
+    public void DecreaseWheat(int decreaseCount)
     {
-        wheatCount += unitManager.PeasantsCount * wheatPerPeasant;
+        wheatCount -= decreaseCount;
         SetWheatText();
     }
 

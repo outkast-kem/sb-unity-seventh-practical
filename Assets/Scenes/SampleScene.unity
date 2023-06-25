@@ -747,11 +747,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheatCount: 3
-  wheatPerPeasant: 3
-  wheatPerWarrior: 5
-  wheatTimer: {fileID: 547040571}
-  foodTimer: {fileID: 119404308}
-  unitManager: {fileID: 925751376}
   wheatCountText: {fileID: 212761200}
 --- !u!1 &496729209
 GameObject:
@@ -2077,6 +2072,7 @@ GameObject:
   - component: {fileID: 2020059101}
   - component: {fileID: 2020059103}
   - component: {fileID: 2020059102}
+  - component: {fileID: 2020059104}
   m_Layer: 5
   m_Name: FoodCyclePanel
   m_TagString: Untagged
@@ -2144,6 +2140,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020059100}
   m_CullTransparentMesh: 1
+--- !u!114 &2020059104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020059100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170f478fd1f736645b59783ae09bcbe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodCycleTimer: {fileID: 119404308}
+  resourceManager: {fileID: 490214434}
+  unitManager: {fileID: 925751376}
+  wheatPerWarrior: 5
 --- !u!1 &2095903584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2317,6 +2329,7 @@ GameObject:
   - component: {fileID: 2142748516}
   - component: {fileID: 2142748518}
   - component: {fileID: 2142748517}
+  - component: {fileID: 2142748519}
   m_Layer: 5
   m_Name: WheatCyclePanel
   m_TagString: Untagged
@@ -2384,6 +2397,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142748515}
   m_CullTransparentMesh: 1
+--- !u!114 &2142748519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142748515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e9cf9938029a9946a0fe2859d6be7bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheatHarvestTimer: {fileID: 547040571}
+  unitManager: {fileID: 925751376}
+  resourcesManager: {fileID: 490214434}
+  wheatPerPeasant: 3
 --- !u!1001 &3544890668187113631
 PrefabInstance:
   m_ObjectHideFlags: 0
