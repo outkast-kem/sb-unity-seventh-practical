@@ -25,6 +25,6 @@ public class FoodCycleComponent : MonoBehaviour
         var decreaseCount = unitManager.WarriorsCount * wheatPerWarrior;
         resourceManager.DecreaseWheat(decreaseCount);
 
-        logComponent.AddEvent($"Цикл еды завершен. Потреблено: {decreaseCount} единиц пшеницы");
+        logComponent.AddEvent($"Цикл еды завершен. Ваши воины скушали {decreaseCount} единиц пшеницы");
     }
 }

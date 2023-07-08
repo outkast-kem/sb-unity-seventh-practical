@@ -8,6 +8,7 @@ public class WheatHarvestCycleComponent : MonoBehaviour
     [SerializeField] Timer wheatHarvestTimer;
     [SerializeField] UnitManagerComponent unitManager;
     [SerializeField] ResourcesManagerComponent resourcesManager;
+    [SerializeField] LogComponent logComponent;
 
     /// <summary>
     /// Кол-во собираемой крестьянином за цикл пшеницы
@@ -23,5 +24,7 @@ public class WheatHarvestCycleComponent : MonoBehaviour
     {
         var wheatCount = unitManager.PeasantsCount * wheatPerPeasant;
         resourcesManager.IncreaseWheat(wheatCount);
+
+        logComponent.AddEvent($"Цикл сбора завершен. Ваши крестьяне собрали {wheatCount} единиц пшеницы");
     }
 }

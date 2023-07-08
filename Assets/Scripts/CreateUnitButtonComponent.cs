@@ -17,6 +17,7 @@ namespace Assets.Scripts
         [SerializeField] private int unitCost;
         [SerializeField] private Image timerImage;
         [SerializeField] private UnitType unitType;
+        [SerializeField] private LogComponent logComponent;
  
         private Button _button;
         private bool _isTimerStarted;
@@ -81,9 +82,11 @@ namespace Assets.Scripts
             switch (unitType)
             {
                 case UnitType.Peasant:
+                    logComponent.AddEvent("Вы наняли нового крестьянина!");
                     unitManager.IncreasePeasantCount();
                     break;
                 case UnitType.Warrior:
+                    logComponent.AddEvent("Вы обучили нового воина!");
                     unitManager.IncreaseWarriorsCount();
                     break;
                 default: throw new InvalidOperationException("Unit type should not be None");

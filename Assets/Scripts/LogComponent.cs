@@ -8,10 +8,13 @@ using UnityEngine.UI;
 /// </summary>
 public class LogComponent : MonoBehaviour
 {
-    [SerializeField] Text logText;
+    [SerializeField] Text currentLogText;
+    [SerializeField] Text historyLogsText;
 
-    private const int MAX_LOG_COUNT = 5;
+    private const int MAX_LOG_COUNT = 4;
+
     private LinkedList<string> _events;
+    private string _currentLog; 
 
     private void Start()
     {
@@ -25,10 +28,13 @@ public class LogComponent : MonoBehaviour
     /// </summary>
     public void AddEvent(string ev)
     {
-        _events.AddLast(ev);
+        if (!string.IsNullOrEmpty(_currentLog))
+            _events.AddLast(_currentLog);            
 
         if (_events.Count > MAX_LOG_COUNT)
             _events.RemoveFirst();
+
+        _currentLog = ev;
 
         VisualizeLogs();
     }
@@ -42,6 +48,7 @@ public class LogComponent : MonoBehaviour
             stringBuilder.Insert(0, ev + "\n");
         }
 
-        logText.text = stringBuilder.ToString();
+        currentLogText.text = _currentLog;
+        historyLogsText.text = stringBuilder.ToString();
     }
 }
