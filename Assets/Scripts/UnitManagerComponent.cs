@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Компонент работы с юнитами
+/// </summary>
 public class UnitManagerComponent : MonoBehaviour
 {
     [SerializeField] private int peasantsCount;
@@ -9,7 +12,14 @@ public class UnitManagerComponent : MonoBehaviour
     [SerializeField] private Text peasantsCountText;
     [SerializeField] private Text warriorsCountText;
 
+    /// <summary>
+    /// Количество крестьян
+    /// </summary>
     public int PeasantsCount => peasantsCount;
+
+    /// <summary>
+    /// Количество воинов
+    /// </summary>
     public int WarriorsCount => warriorsCount;
 
     void Start()
@@ -18,10 +28,9 @@ public class UnitManagerComponent : MonoBehaviour
         UpdateWarriorsCountText();
     }
 
-    private void Update()
-    {
-    }
-
+    /// <summary>
+    /// Увеличивает кол-во крестьян на единицу
+    /// </summary>
     public void IncreasePeasantCount()
     {
         Debug.Log("Peasant ready");
@@ -29,10 +38,22 @@ public class UnitManagerComponent : MonoBehaviour
         UpdatePeasantsCountText();
     }
 
+    /// <summary>
+    /// Увеличивает кол-во воинов на единицу
+    /// </summary>
     public void IncreaseWarriorsCount()
     {
         Debug.Log("Warrior ready");
         warriorsCount++;
+        UpdateWarriorsCountText();
+    }
+
+    /// <summary>
+    /// Уменьшает кол-во воинов на указанное количество
+    /// </summary>
+    public void DecreaseWarriorsCount(int decreaseCount)
+    {
+        warriorsCount -= decreaseCount;
         UpdateWarriorsCountText();
     }
 
