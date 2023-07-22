@@ -13,10 +13,13 @@ public class SoundComponent : MonoBehaviour
 
     private float _defaultVolume;
 
-    private void Start()
+    private void Awake()
     {
         _buttonClickAudio = GetComponent<AudioSource>();
+    }
 
+    private void Start()
+    {
         _isAudioEnable = _backgroundAudio.playOnAwake;
         _defaultVolume = _backgroundAudio.volume;
 

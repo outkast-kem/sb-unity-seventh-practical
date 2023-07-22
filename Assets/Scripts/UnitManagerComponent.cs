@@ -12,13 +12,15 @@ public class UnitManagerComponent : MonoBehaviour
     [SerializeField] private Text peasantsCountText;
     [SerializeField] private Text warriorsCountText;
 
+    [SerializeField] private GameStatisticsComponent statisticsComponent;
+
     /// <summary>
-    ///  оличество кресть€н
+    /// “екущее количество кресть€н
     /// </summary>
     public int PeasantsCount => peasantsCount;
 
     /// <summary>
-    ///  оличество воинов
+    /// “екущее количество воинов
     /// </summary>
     public int WarriorsCount => warriorsCount;
 
@@ -29,27 +31,29 @@ public class UnitManagerComponent : MonoBehaviour
     }
 
     /// <summary>
-    /// ”величивает кол-во кресть€н на единицу
+    /// ”величивает текущее кол-во кресть€н на единицу
     /// </summary>
     public void IncreasePeasantCount()
     {
-        Debug.Log("Peasant ready");
         peasantsCount++;
+        statisticsComponent.TotalPeasants++;
+
         UpdatePeasantsCountText();
     }
 
     /// <summary>
-    /// ”величивает кол-во воинов на единицу
+    /// ”величивает текущее кол-во воинов на единицу
     /// </summary>
     public void IncreaseWarriorsCount()
     {
-        Debug.Log("Warrior ready");
         warriorsCount++;
+        statisticsComponent.TotalWarriors++;
+
         UpdateWarriorsCountText();
     }
 
     /// <summary>
-    /// ”меньшает кол-во воинов на указанное количество
+    /// ”меньшает текущее кол-во воинов на указанное количество
     /// </summary>
     public void DecreaseWarriorsCount(int decreaseCount)
     {

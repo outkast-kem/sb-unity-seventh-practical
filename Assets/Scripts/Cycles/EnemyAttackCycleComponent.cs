@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Компонент, отвечающий за фичу атаки волн врагов
@@ -8,9 +9,12 @@ public class EnemyAttackCycleComponent : MonoBehaviour
     [SerializeField] Timer enemyAttackTimer;
     [SerializeField] LogComponent logComponent;
     [SerializeField] UnitManagerComponent unitManager;
+    [SerializeField] Text nextWaveCountText;
 
     [SerializeField] int emptyAttackLeft;
     [SerializeField] int initialAttackEnemies;
+
+    [SerializeField] GameStatisticsComponent statisticsComponent;
 
     private int _attacksPassedCount = 0;
 
@@ -28,7 +32,10 @@ public class EnemyAttackCycleComponent : MonoBehaviour
             emptyAttackLeft--;
 
             if (emptyAttackLeft == 0)
+            {
                 _nextWaveEnemies = initialAttackEnemies;
+                UpdateNextWaveCountText();
+            }
 
             return;
         }
@@ -37,6 +44,10 @@ public class EnemyAttackCycleComponent : MonoBehaviour
 
         _attacksPassedCount++;
         _nextWaveEnemies += GetIncreasment();
+
+        statisticsComponent.TotalAttacks++;
+
+        UpdateNextWaveCountText();
     }
 
     /// <summary>
@@ -50,4 +61,9 @@ public class EnemyAttackCycleComponent : MonoBehaviour
         < 20 => 4,
         _  => 5
     };
+
+    private void UpdateNextWaveCountText()
+    {
+        nextWaveCountText.text = _nextWaveEnemies.ToString();
+    }
 }

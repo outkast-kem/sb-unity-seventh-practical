@@ -8,7 +8,7 @@ public class SoundButtonViewComponent : MonoBehaviour
 
     private Image _buttonImage;
 
-    private void Start()
+    private void Awake()
     {
         _buttonImage = GetComponent<Image>();
     }
