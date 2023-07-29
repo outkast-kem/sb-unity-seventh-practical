@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,14 @@ public class UnitManagerComponent : MonoBehaviour
 {
     [SerializeField] private int peasantsCount;
     [SerializeField] private int warriorsCount;
+    [SerializeField] private int peasantsToWin = 70;
 
     [SerializeField] private Text peasantsCountText;
     [SerializeField] private Text warriorsCountText;
 
     [SerializeField] private GameStatisticsComponent statisticsComponent;
+
+    public event GameResultDelegate OnGameEnded;
 
     /// <summary>
     /// Текущее количество крестьян
@@ -24,10 +28,22 @@ public class UnitManagerComponent : MonoBehaviour
     /// </summary>
     public int WarriorsCount => warriorsCount;
 
-    void Start()
+    private void Start()
     {
         UpdatePeasantsCountText();
         UpdateWarriorsCountText();
+    }
+
+    private void Update()
+    {
+        if (warriorsCount < 0)
+        {
+            OnGameEnded?.Invoke(GameResults.BattleLose);
+        }    
+        else if (peasantsCount >= peasantsToWin)
+        {
+            OnGameEnded?.Invoke(GameResults.PeasantsWin);
+        }
     }
 
     /// <summary>

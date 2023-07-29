@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,10 @@ public class ResourcesManagerComponent : MonoBehaviour
     [SerializeField] private Text wheatCountText;
     [SerializeField] private GameStatisticsComponent statisticsComponent;
 
+    [SerializeField] private int wheatToWin = 200;
+
+    public event GameResultDelegate OnGameEnded;
+
     /// <summary>
     /// Текущее кол-во пшеницы
     /// </summary>
@@ -18,6 +23,18 @@ public class ResourcesManagerComponent : MonoBehaviour
     private void Start()
     {
         SetWheatText();
+    }
+
+    private void Update()
+    {
+        if (wheatCount < 0)
+        {
+            OnGameEnded?.Invoke(GameResults.WheatLose);
+        }
+        else if (wheatCount >= wheatToWin)
+        {
+            OnGameEnded?.Invoke(GameResults.WheatWin);
+        }
     }
 
     /// <summary>
@@ -37,8 +54,6 @@ public class ResourcesManagerComponent : MonoBehaviour
     public void DecreaseWheat(int decreaseCount)
     {
         wheatCount -= decreaseCount;
-
-        // TODO: set result
 
         SetWheatText();
     }

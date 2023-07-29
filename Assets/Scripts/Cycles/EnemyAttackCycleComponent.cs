@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,19 +7,23 @@ using UnityEngine.UI;
 /// </summary>
 public class EnemyAttackCycleComponent : MonoBehaviour
 {
-    [SerializeField] Timer enemyAttackTimer;
-    [SerializeField] LogComponent logComponent;
-    [SerializeField] UnitManagerComponent unitManager;
-    [SerializeField] Text nextWaveCountText;
+    [SerializeField] private Timer enemyAttackTimer;
+    [SerializeField] private LogComponent logComponent;
+    [SerializeField] private UnitManagerComponent unitManager;
+    [SerializeField] private GameStatisticsComponent statisticsComponent;
 
-    [SerializeField] int emptyAttackLeft;
-    [SerializeField] int initialAttackEnemies;
+    [SerializeField] private Text nextWaveCountText;
 
-    [SerializeField] GameStatisticsComponent statisticsComponent;
+    [SerializeField] private int emptyAttackLeft;
+    [SerializeField] private int initialAttackEnemies;
+
+    [SerializeField] private int attacksToWin = 20;
 
     private int _attacksPassedCount = 0;
 
     private int _nextWaveEnemies = 0;
+
+    public event GameResultDelegate OnGameEnded;
 
     private void Start()
     {
@@ -46,6 +51,12 @@ public class EnemyAttackCycleComponent : MonoBehaviour
         _nextWaveEnemies += GetIncreasment();
 
         statisticsComponent.TotalAttacks++;
+
+        if (_attacksPassedCount >= attacksToWin)
+        {
+            OnGameEnded?.Invoke(GameResults.BattleWin);
+            return;
+        }
 
         UpdateNextWaveCountText();
     }
