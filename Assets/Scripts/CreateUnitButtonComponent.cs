@@ -20,11 +20,13 @@ namespace Assets.Scripts
         [SerializeField] private LogComponent logComponent;
  
         private Button _button;
+        private AudioSource _audio;
         private bool _isTimerStarted;
 
         private void Start()
         {
             _button = GetComponent<Button>();
+            _audio = GetComponent<AudioSource>();
 
             createUnitTimer.OnTick += CreateUnitTimer_OnTick;
             createUnitTimer.OnTimerEnded += CreateUnitTimer_OnTimerEnded;
@@ -44,8 +46,6 @@ namespace Assets.Scripts
         /// </summary>
         public void CreateUnit()
         {
-            Debug.Log("Start create unit");
-
             resources.DecreaseWheat(unitCost);
 
             _isTimerStarted = true;
@@ -75,6 +75,8 @@ namespace Assets.Scripts
         {
             _isTimerStarted = false;
             IncreaseUnitsCount();
+
+            _audio.Play();
         }
 
         private void IncreaseUnitsCount()

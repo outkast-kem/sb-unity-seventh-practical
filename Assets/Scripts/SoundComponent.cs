@@ -39,6 +39,9 @@ public class SoundComponent : MonoBehaviour
     /// </summary>
     public void ChangeAudioEnable()
     {
+        if (!_backgroundAudio.isPlaying)
+            _backgroundAudio.Play();
+
         if (_isAudioEnable)
             _backgroundAudio.volume = 0;
         else
