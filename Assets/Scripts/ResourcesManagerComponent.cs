@@ -10,6 +10,7 @@ public class ResourcesManagerComponent : MonoBehaviour
     [SerializeField] private int wheatCount;
     [SerializeField] private Text wheatCountText;
     [SerializeField] private GameStatisticsComponent statisticsComponent;
+    [SerializeField] private GameSpeedComponent gameSpeedComponent;
 
     [SerializeField] private int wheatToWin = 200;
 
@@ -27,6 +28,9 @@ public class ResourcesManagerComponent : MonoBehaviour
 
     private void Update()
     {
+        if (gameSpeedComponent.CurrentState == GameSpeedState.Pause)
+            return;
+
         if (wheatCount < 0)
         {
             OnGameEnded?.Invoke(GameResults.WheatLose);

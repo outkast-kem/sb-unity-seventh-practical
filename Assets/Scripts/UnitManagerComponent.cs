@@ -15,6 +15,7 @@ public class UnitManagerComponent : MonoBehaviour
     [SerializeField] private Text warriorsCountText;
 
     [SerializeField] private GameStatisticsComponent statisticsComponent;
+    [SerializeField] private GameSpeedComponent gameSpeedComponent;
 
     public event GameResultDelegate OnGameEnded;
 
@@ -36,6 +37,9 @@ public class UnitManagerComponent : MonoBehaviour
 
     private void Update()
     {
+        if (gameSpeedComponent.CurrentState == GameSpeedState.Pause)
+            return;
+
         if (warriorsCount < 0)
         {
             OnGameEnded?.Invoke(GameResults.BattleLose);

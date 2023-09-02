@@ -6,7 +6,9 @@ using UnityEngine;
 public class SoundComponent : MonoBehaviour
 {
     [SerializeField] SoundButtonViewComponent soundButtonViewComponent;
-    [SerializeField] AudioSource _backgroundAudio;
+    [SerializeField] AudioSource backgroundAudio;
+    [SerializeField] AudioSource winAudio;
+    [SerializeField] AudioSource loseAudio;
 
     private AudioSource _buttonClickAudio;
     private bool _isAudioEnable;
@@ -20,8 +22,8 @@ public class SoundComponent : MonoBehaviour
 
     private void Start()
     {
-        _isAudioEnable = _backgroundAudio.playOnAwake;
-        _defaultVolume = _backgroundAudio.volume;
+        _isAudioEnable = backgroundAudio.playOnAwake;
+        _defaultVolume = backgroundAudio.volume;
 
         SetImage();
     }
@@ -39,17 +41,27 @@ public class SoundComponent : MonoBehaviour
     /// </summary>
     public void ChangeAudioEnable()
     {
-        if (!_backgroundAudio.isPlaying)
-            _backgroundAudio.Play();
+        if (!backgroundAudio.isPlaying)
+            backgroundAudio.Play();
 
         if (_isAudioEnable)
-            _backgroundAudio.volume = 0;
+            backgroundAudio.volume = 0;
         else
-            _backgroundAudio.volume = _defaultVolume;
+            backgroundAudio.volume = _defaultVolume;
 
         _isAudioEnable = !_isAudioEnable;
 
         SetImage();
+    }
+
+    public void PlayWin()
+    {
+        winAudio.PlayDelayed(1);
+    }
+
+    public void PlayLose()
+    {
+        loseAudio.PlayDelayed(1);
     }
 
     private void SetImage()

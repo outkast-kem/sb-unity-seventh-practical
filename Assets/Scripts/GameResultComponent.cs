@@ -8,16 +8,19 @@ using UnityEngine.UI;
 /// </summary>
 public class GameResultComponent : MonoBehaviour
 {
-    [SerializeField] GameObject gameResultPanel;
+    [SerializeField] private GameObject gameResultPanel;
 
-    [SerializeField] Text resultText;
-    [SerializeField] Text resultDescription;
-    [SerializeField] Text statisticsText;
+    [SerializeField] private Text resultText;
+    [SerializeField] private Text resultDescription;
+    [SerializeField] private Text statisticsText;
 
-    [SerializeField] UnitManagerComponent unitManager;
-    [SerializeField] ResourcesManagerComponent resourceManager;
-    [SerializeField] EnemyAttackCycleComponent enemyAttacks;
-    [SerializeField] GameStatisticsComponent statisticsComponent;
+    [SerializeField] private UnitManagerComponent unitManager;
+    [SerializeField] private ResourcesManagerComponent resourceManager;
+    [SerializeField] private EnemyAttackCycleComponent enemyAttacks;
+    [SerializeField] private GameStatisticsComponent statisticsComponent;
+    [SerializeField] private GameSpeedComponent gameSpeedComponent;
+
+    [SerializeField] SoundComponent soundManager;
 
     private Dictionary<GameResults, (string header, string description)> _gameResultsText = new()
     {
@@ -45,7 +48,21 @@ public class GameResultComponent : MonoBehaviour
 
     private void SetResult(GameResults result)
     {
-        Time.timeScale = 0;
+        gameSpeedComponent.SetPause();
+
+        soundManager.ChangeAudioEnable();
+        switch (result)
+        {
+            case GameResults.BattleWin:
+            case GameResults.WheatWin:
+            case GameResults.PeasantsWin:
+                soundManager.PlayWin();
+                break;
+            case GameResults.BattleLose:
+            case GameResults.WheatLose:
+                soundManager.PlayLose();
+                break;
+        }
 
         gameResultPanel.SetActive(true);
 

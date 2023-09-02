@@ -27,6 +27,11 @@ public class GameSpeedComponent : MonoBehaviour
     }
 
     /// <summary>
+    /// Текущее состояние скорости игры
+    /// </summary>
+    public GameSpeedState CurrentState => _currentGameSpeed;
+
+    /// <summary>
     /// Устанавливает скорость игры на <see cref="GameSpeedState.Pause"/>
     /// </summary>
     public void SetPause() => SetGameSpeedState(GameSpeedState.Pause);

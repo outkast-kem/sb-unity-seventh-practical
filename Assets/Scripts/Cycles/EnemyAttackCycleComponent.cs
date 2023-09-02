@@ -48,7 +48,7 @@ public class EnemyAttackCycleComponent : MonoBehaviour
         unitManager.DecreaseWarriorsCount(_nextWaveEnemies);
 
         _attacksPassedCount++;
-        _nextWaveEnemies += GetIncreasment();
+        _nextWaveEnemies = GetNextWave();
 
         statisticsComponent.TotalAttacks++;
 
@@ -64,13 +64,12 @@ public class EnemyAttackCycleComponent : MonoBehaviour
     /// <summary>
     /// Определяет число, на которое увеличивается кол-во врагов в следующей волне на основании кол-ва пережитых волн атак
     /// </summary>
-    private int GetIncreasment() => _attacksPassedCount switch
+    private int GetNextWave() => _attacksPassedCount switch
     {
-        < 5 => 1,
-        < 10 => 2,
-        < 15 => 3,
-        < 20 => 4,
-        _  => 5
+        <= 3 => 1,
+        <= 6 => 2,
+        <= 10 => 3,
+        _  => 4
     };
 
     private void UpdateNextWaveCountText()
