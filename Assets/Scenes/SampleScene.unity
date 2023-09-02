@@ -1449,7 +1449,7 @@ MonoBehaviour:
   wheatCountText: {fileID: 212761200}
   statisticsComponent: {fileID: 1952648617}
   gameSpeedComponent: {fileID: 902018727}
-  wheatToWin: 400
+  wheatToWin: 250
 --- !u!1 &496729209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,7 +2606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peasantsCount: 2
   warriorsCount: 0
-  peasantsToWin: 150
+  peasantsToWin: 20
   peasantsCountText: {fileID: 841100353}
   warriorsCountText: {fileID: 502213090}
   statisticsComponent: {fileID: 1952648617}
